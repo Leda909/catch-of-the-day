@@ -1,2 +1,3 @@
 # catch-of-the-day
-Basic React
+
+Basic React application
