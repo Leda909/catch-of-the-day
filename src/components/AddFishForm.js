@@ -6,7 +6,6 @@ class AddFishForm extends React.Component {
     statusRef = React.createRef();
     descRef = React.createRef();
     imageRef = React.createRef();
-  
 
     createFish = (event) => {
         // 1. Stop the form from submitting
@@ -15,12 +14,12 @@ class AddFishForm extends React.Component {
             // console.log(this.nameRef.value.value);
         // 2. get the text from that input
         const fish = {
-            name : this.nameRef.current.value,
-            price : parseFloat(this.priceRef.value.value),
-            status : this.statusRef.value.value,
-            desc : this.discRef.value.value,
-            image : this.imageRef.value.value,
-        };
+            name: this.nameRef.current.value,
+            price: parseFloat(this.priceRef.current.value),
+            status: this.statusRef.current.value,
+            desc: this.descRef.current.value,
+            image: this.imageRef.current.value
+          };
             // console.log(fish);
         // 3. Change the page to /store/whatever-they-entered
         this.props.addFish(fish);
