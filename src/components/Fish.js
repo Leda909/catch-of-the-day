@@ -2,9 +2,9 @@ import React from "react";
 import { formatPrice } from "../helpers";
 
 class Fish extends React.Component {
-    handelClick = () => {
-        this.props.addToOrder(this.props.index);
-    };
+    // handelClick = () => {
+    //     this.props.addToOrder(this.props.index);
+    // };
 
     render() {
         // This is the form if You want to write out each variable separetly, however, there is a shorter, collective version above
@@ -22,7 +22,7 @@ class Fish extends React.Component {
                 <p>{desc}</p>
                 <button
                     disabled={!isAvailable}
-                    onClick={this.handelClick}
+                    onClick={() => this.props.addToOrder(this.props.index)}
                     >
                     {isAvailable ? "Add To Order" : "Sold Out!"}
                 </button>
