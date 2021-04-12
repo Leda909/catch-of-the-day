@@ -15,10 +15,26 @@ class App extends React.Component {
   componentDidMount() {
     // console.log('mount');
     const { params } = this.props.match;
+    // 1. reinstate our local storage
+    const localStorageRef = localStorage.getItem(params.storeId);
+    // console.log(localStorageRef);
+    if(localStorageRef) {
+      // As localStorageRef is a string, we need to turn it back into an object by the JSON.parse
+      this.setState({ order: JSON.parse(localStorageRef)})
+    }
     this.ref = base.syncState(`${params.storeId}/fishes`,{
       context : this,
       state: 'fishes'
     });
+  }
+
+  componentDidUpdate() {
+    // console.log("IT Updated!!");
+    console.log(this.state.order);
+    localStorage.setItem(
+      this.props.match.params.storeId,
+      JSON.stringify(this.state.order)
+    );
   }
 
   componentWillUnmount() {
