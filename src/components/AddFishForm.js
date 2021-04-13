@@ -28,22 +28,31 @@ class AddFishForm extends React.Component {
     };
 
     render() {
-        return (
-            <form className="fish-edit" onSubmit={this.createFish}>
-                <input name="name" type="text" placeholder="Name" />
-                <input name="price" type="text" placeholder="Price" />
+    return (
+      <form className="fish-edit" onSubmit={this.createFish}>
+        <input name="name" ref={this.nameRef} type="text" placeholder="Name" />
+        <input
+          name="price"
+          ref={this.priceRef}
+          type="text"
+          placeholder="Price"
+        />
+        <select name="status" ref={this.statusRef}>
+          <option value="available">Fresh!</option>
+          <option value="unavailable">Sold Out!</option>
+        </select>
 
-                <select name="status">
-                    <option value="available">Fresh!</option>
-                    <option value="unavailable">Sold out!</option>
-                </select>
-
-                <textarea name="desc" type="text" placeholder="Desc"></textarea>
-                <input name="image" type="text" placeholder="Image" />
-                <button type="submit">+ Add Fish</button>
-            </form>
-        );
-    }
+        <textarea name="desc" ref={this.descRef} placeholder="Desc" />
+        <input
+          name="image"
+          ref={this.imageRef}
+          type="text"
+          placeholder="Image"
+        />
+        <button type="submit">+ Add Fish</button>
+      </form>
+    );
+  }
 }
 
 export default AddFishForm;
