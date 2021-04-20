@@ -19,7 +19,7 @@ class Inventory extends React.Component {
     uid: null,
     owner: null,
   }
-  
+
   authHandler = async authData => {
     console.log(authData);
     //  1. Look up the current store in firebase database
@@ -48,7 +48,21 @@ class Inventory extends React.Component {
   };
 
   render() {
-    return <Login authenticate={this.authenticate} />;
+    // 1. Check if they are logged in
+    if (!this.state.uid) {
+      return <Login authenticate={this.authenticate} />;
+    }
+
+    //  2. Check if they are the owner of the store
+    if (this.state.uid !== this.state.owner) {
+      return  (
+        <div>
+          <p>Sorry, you are not the owner!</p>
+        </div>
+      );
+    }
+
+    //  3. They must be the owner,just render the inventory
     return (
       <div className="inventory">
         <h2>Inventory</h2>
