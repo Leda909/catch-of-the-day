@@ -4,7 +4,7 @@ import firebase from "firebase";
 import AddFishForm from "./AddFishForm";
 import EditFishForm from "./EditFishForm";
 import Login from "./Login";
-import { firebaseApp } from "../base";
+import base, { firebaseApp } from "../base";
 
 class Inventory extends React.Component {
   static propTypes = {
@@ -15,11 +15,27 @@ class Inventory extends React.Component {
     addFish: PropTypes.func
   };
   
+  state = {
+    uid: null,
+    owner: null,
+  }
+  
   authHandler = async authData => {
     console.log(authData);
     //  1. Look up the current store in firebase database
+    const store = await base.fetch(this.props.storeId, {context: this });
+    console.log(store);
     //  2. Claim it if there is no owner
+    if (!store.owner) {
+      await base.post(`${this.props.storeId}/owner`, {
+        data: authData.user.uid
+      });
+    }
     //  3. Set the state the inventory component to reflect the current user
+    this.setState({
+      uid: authData.user.uid,
+      owner: store.owner || authData.user.uid,
+    })
   };
 
   authenticate = provider => {

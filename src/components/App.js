@@ -124,6 +124,8 @@ class App extends React.Component {
           deleteFish = {this.deleteFish}
           loadSampleFishes={this.loadSampleFishes}
           fishes={this.state.fishes}
+          // To get the name of the store
+          storeId={this.props.match.params.storeId}
         />
       </div>
     );
